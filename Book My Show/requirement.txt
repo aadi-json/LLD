@@ -1,0 +1,55 @@
+BookMyShow LLD – 45-Minute Design
+1. Functional Requirements
+Only 5 requirements:
+
+Display movies and available shows.
+Display available seats for a show.
+Allow users to select seats.
+Book seats and make payment.
+Cancel a booking.
+
+2. Non-Functional Requirements
+Only 3 requirements:
+Consistency: The same seat cannot be booked twice for the same show.
+Maintainability: Code should be modular and easy to extend.
+Reliability: A booking should be confirmed only after successful payment.
+
+3. Classes Required
+We'll use just 7 classes:
+
+Class	Responsibility
+User	Stores user details
+Movie	Stores movie details
+Theatre	Stores theatre details
+Seat	Stores seat details
+Show	Manages show and seat availability
+Booking	Manages bookings and cancellation
+Payment	Handles payment
+
+No separate Screen class for now. No unnecessary factories or managers.
+
+4. Design Pattern
+Only one:
+Strategy Pattern for payment:
+UPI Payment
+Card Payment
+5. 45-Minute Implementation Plan
+Time	Task
+5 min	Requirements + UML
+5 min	Entity classes
+10 min	Show and seat availability
+10 min	Booking and cancellation
+5 min	Payment Strategy
+10 min	Main file and testing
+Final folder structure
+Book My Show/
+│
+├── main.py
+├── user.py
+├── movie.py
+├── theatre.py
+├── seat.py
+├── show.py
+├── booking.py
+├── payment.py
+└── README.md
