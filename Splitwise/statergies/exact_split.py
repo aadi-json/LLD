@@ -21,6 +21,7 @@ class ExactSplit():
 
         participants_ids = {user.user_id for user in participants}
 
+        print(participants_ids)
         if set(exact_share.keys()) != participants_ids:
             raise ValueError("Share must be provided for every participant")
 
@@ -28,6 +29,7 @@ class ExactSplit():
             (Decimal(share) for share in exact_share.values()),
             Decimal("0")
         )
+        print(total)
 
         if total != amount:
             raise ValueError("Total share must be equal the expence")
@@ -35,6 +37,7 @@ class ExactSplit():
         split = []
         for user in participants:
             share = Decimal(exact_share[user.user_id])
+            print(share)
             if share < Decimal("0"):
                 raise ValueError("Share cannot be negative")
 

@@ -9,6 +9,7 @@ from statergies.exact_split import ExactSplit
 
 user_1 = User("Aditya@123", "aditya@gmail.com", "Aditya Gawande")
 user_2 = User("Shasta@123", "shasta@gmail.com", "Shasta Tyade")
+user_3 = User("Harsh@123", "Harsh@gmail", "Harsh Chaudhary")
 # print(user_1)
 # print(user_2)
 
@@ -37,22 +38,45 @@ user_2 = User("Shasta@123", "shasta@gmail.com", "Shasta Tyade")
 #     print(split.get_details())
 
 
-participants = [user_1, user_2]
+# participants = [user_1, user_2]
 
-exact_shares = {
-    user_1.user_id: Decimal("700"),
-    user_2.user_id: Decimal("500")
+# exact_shares = {
+#     user_1.user_id: Decimal("60"),
+#     user_2.user_id: Decimal("50")
+# }
+
+# exact_split = ExactSplit()
+
+# splits = exact_split.split(
+#     Decimal("1200"),
+#     participants,
+#     exact_shares
+# )
+
+# print("------ Exact Split ---------")
+
+# for split in splits:
+#     print(split.get_details())
+
+from statergies.percentage_split import PercentageSplit
+
+participants = [user_1, user_2, user_3]
+
+percentages = {
+    user_1.user_id: Decimal("60"),
+    user_2.user_id: Decimal("10"),
+    user_3.user_id:Decimal("30")
 }
 
-exact_split = ExactSplit()
+percentage_split = PercentageSplit()
 
-splits = exact_split.split(
+splits = percentage_split.split(
     Decimal("1200"),
     participants,
-    exact_shares
+    percentages
 )
 
-print("------ Exact Split ---------")
+print("------ Percentage Split ------")
 
 for split in splits:
     print(split.get_details())
