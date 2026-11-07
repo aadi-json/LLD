@@ -1,0 +1,111 @@
+Splitwise LLD – Step 1: Requirements Gathering
+===============================
+
+Before writing code or designing classes, we need to define what our system should do.
+
+In an LLD interview, start by identifying Functional Requirements (FR) and Non-Functional Requirements (NFR).
+
+====================
+1. Functional Requirements (FR)
+====================
+Functional requirements describe the features and operations our system must support.
+
+=====================================
+For our Splitwise application, we'll consider the following:
+======================================
+FR1	User Management	Users can register and have a unique ID.
+FR2	Create Group	Users can create groups and add multiple members.
+FR3	Add Expense	Users can add expenses individually or within a group.
+FR4	Split Expense	Expenses can be divided using Equal, Exact and Percentage splits.
+FR5	Track Balances	System maintains how much each user owes or is owed.
+FR6	View Balances	Users can view their outstanding balances with other users.
+FR7	Settle Debt	Users can settle outstanding amounts with other users.
+FR8	Expense History	Users can view their previous expenses and settlements.
+FR9	Simplify Debts	System can minimize the number of transactions required to settle group debts.
+FR10	Delete Expense	Users can delete their expenses and recalculate balances.
+
+==================
+Expense splitting examples
+==================
+We will support three splitting strategies.
+
+1. Equal Split
+=========
+Aditya, Rahul and Amit share an expense of ₹900.
+- Aditya: ₹300
+- Rahul: ₹300
+- Amit: ₹300
+
+2. Exact Split
+=========
+Total expense: ₹1,000.
+- Aditya: ₹500
+- Rahul: ₹300
+- Amit: ₹200
+
+3. Percentage Split
+============
+Total expense: ₹1,000.
+- Aditya: 50% = ₹500
+- Rahul: 30% = ₹300
+- Amit: 20% = ₹200
+
+2. Non-Functional Requirements (NFR)
+=========================
+Non-functional requirements describe how the system should perform.
+ID	     Non-Functional     Requirement	Description
+NFR1	Accuracy	         All expense calculations and balances must be accurate.
+NFR2	Consistency	        Balances must remain consistent after adding, deleting 
+                                         or settling expenses.
+NFR3	Extensibility	      New splitting strategies should be easy to introduce.
+NFR4	Maintainability	   Classes should have clearly defined responsibilities.
+NFR5	Scalability	             System design should support increasing users, groups and expenses.
+NFR6	Reliability	Expense and settlement operations should not result in partial updates.
+NFR7	Performance	Balance retrieval should be efficient.
+NFR8	Data Integrity	Expenses should reference valid users and groups.
+
+========================
+3. Scope of Our LLD Implementation
+========================
+For an SDE-1 interview, we shouldn't implement everything.
+
+Let's divide the scope:
+Feature	Priority
+User Management	Must Have
+Group Management	Must Have
+Add Expense	Must Have
+Equal Split	Must Have
+Exact Split	Must Have
+Percentage Split	Must Have
+Balance Calculation	Must Have
+Settle Expense	Must Have
+Simplify Debts	Good to Have
+Expense History	Good to Have
+Delete Expense	Good to Have
+Authentication	Out of Scope
+Payment Gateway	Out of Scope
+Notifications	Out of Scope
+
+====================
+4. Important Design Decisions
+====================
+Before moving to UML, establish these rules:
+1. A user can belong to multiple groups.
+2. A group can contain multiple users.
+3. One user pays an expense on behalf of multiple users.
+4. Only participating users are included in an expense split.
+5. The payer's share is also included in the calculation.
+6. Total individual shares must equal the total expense.
+7. All monetary calculations should use Python's Decimal, not floating-point numbers.
+8. Settlements must update outstanding balances.
+5. Interviewer Discussion
+
+===========================
+If I were interviewing you, I would ask:
+===========================
+Question 1: Can a user add an expense without creating a group?
+Question 2: Can an expense have multiple payers?
+Question 3: What happens if the percentage split adds up to 110%?
+Question 4: How will you handle rounding errors when splitting ₹100 among three people?
+Question 5: How would you add a new splitting strategy without modifying existing splitting logic?
+These questions help establish the boundaries of our design.
